@@ -1,6 +1,6 @@
-package com.playdata.pdshared.board.domain.entity;
+package com.playdata.pdshared.domain.board.domain.entity;
 
-import com.playdata.pdshared.group.domain.entity.Team;
+import com.playdata.pdshared.domain.member.domain.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,12 +9,12 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Builder
-public class BoardTeam {
+public class Downloads {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private Board board;
+    private Member member;
     @ManyToOne
-    private Team team;
+    private Board board;
 }

@@ -1,4 +1,4 @@
-package com.playdata.pdshared.member;
+package com.playdata.pdshared.domain.member;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

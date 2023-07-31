@@ -1,6 +1,6 @@
-package com.playdata.pdshared.board.domain.entity;
+package com.playdata.pdshared.domain.board.domain.entity;
 
-import com.playdata.pdshared.member.domain.entity.Member;
+import com.playdata.pdshared.domain.member.domain.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Builder
-public class Downloads {
+public class Likes {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

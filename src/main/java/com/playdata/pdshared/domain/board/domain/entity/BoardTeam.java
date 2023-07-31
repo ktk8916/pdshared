@@ -1,5 +1,6 @@
-package com.playdata.pdshared.board.domain.entity;
+package com.playdata.pdshared.domain.board.domain.entity;
 
+import com.playdata.pdshared.domain.group.domain.entity.Team;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,12 +9,12 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Builder
-public class BoardHashtag {
+public class BoardTeam {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private Board board;
     @ManyToOne
-    private Hashtag hashtag;
+    private Team team;
 }

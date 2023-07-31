@@ -1,4 +1,4 @@
-package com.playdata.pdshared.board.domain.entity;
+package com.playdata.pdshared.domain.board.domain.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
