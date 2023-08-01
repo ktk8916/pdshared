@@ -1,5 +1,6 @@
-package com.playdata.pdshared.domain.board.domain.entity;
+package com.playdata.pdshared.domain.filestorage.domain.entity;
 
+import com.playdata.pdshared.domain.board.domain.entity.Board;
 import com.playdata.pdshared.domain.member.domain.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;

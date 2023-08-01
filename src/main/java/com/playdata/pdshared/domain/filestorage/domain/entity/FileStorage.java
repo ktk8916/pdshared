@@ -21,6 +21,6 @@ public class FileStorage extends BaseEntity {
     private String extension;
     private Long volume;
     private String savePath;
-//    @OneToOne
-//    private Board board;
+    @OneToOne
+    private Board board;
 }

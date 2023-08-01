@@ -26,7 +26,7 @@ public class Board extends BaseEntity {
     private Long downloadCount;
     @Enumerated(EnumType.STRING)
     private ViewType viewType;
-    @OneToOne
+    @OneToOne(mappedBy = "board")
     private FileStorage fileStorage;
     @OneToMany(mappedBy = "board")
     private List<Comment> comments;
