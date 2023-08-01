@@ -32,4 +32,12 @@ public class Board extends BaseEntity {
     private List<Comment> comments;
     @OneToMany(mappedBy = "board")
     private List<BoardHashtag> hashtags;
+
+    public void addViewCount(){
+        this.viewCount++;
+    }
+
+    public void addLikeCount(){this.likeCount++;}
+
+    public void addDownloadCount(){this.downloadCount++;}
 }
