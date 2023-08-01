@@ -97,6 +97,7 @@ class BoardServiceTest {
 //        List<Comment> 재밌음 = commentRepository.findAllByContentContains("재밌음");
 //
 //        assertThat(재밌음.size()).isEqualTo(1);
+        //
     }
 
     @Test
