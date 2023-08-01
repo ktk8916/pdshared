@@ -17,5 +17,12 @@ public class Downloads {
     @ManyToOne
     private Member member;
     @ManyToOne
-    private Board board;
+    private FileStorage fileStorage;
+
+    public static Downloads of(Member member, FileStorage fileStorage){
+        Downloads downloads = new Downloads();
+        downloads.member = member;
+        downloads.fileStorage = fileStorage;
+        return downloads;
+    }
 }
