@@ -2,8 +2,10 @@ package com.playdata.pdshared.domain.filestorage.controller;
 
 import com.playdata.pdshared.domain.filestorage.service.FileStorageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -11,4 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class FileStorageController {
 
     private final FileStorageService fileStorageService;
+
+    @PostMapping
+    public void upload(@RequestParam("file") MultipartFile file){
+        fileStorageService.upload(file);
+    }
+
+    @GetMapping("/{fileStorageId}")
+    public ResponseEntity<Resource> findVideo(@PathVariable("fileStorageId") Long fileStorageId) {
+        Long memberId = 1L; // 임의의 멤버 id
+        return fileStorageService.downloadFileById(fileStorageId, memberId);
+    }
+
 }
