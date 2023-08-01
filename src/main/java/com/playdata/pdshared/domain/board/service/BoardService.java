@@ -19,6 +19,7 @@ public class BoardService {
     private final HashtagRepository hashtagRepository;
     private final BoardHashtagRepository boardHashtagRepository;
     private final ViewsRepository viewsRepository;
+    private final LikesRepository likesRepository;
     private final CommentRepository commentRepository;
 
     private final BoardTeamRepository boardTeamRepository;
@@ -33,21 +34,28 @@ public class BoardService {
 
         //Board 입력을 받을때, 해쉬태그도 입력이 필요함
         List<Hashtag> hashtags = request.hashtags();
-        for(Hashtag h : hashtags){
-            Hashtag byName = hashtagRepository.findByName(h.getName());
 
-            if(byName==null){
-                hashtagRepository.save(h);
+        if(hashtags!=null){
+            for(Hashtag h : hashtags){
+                Hashtag byName = hashtagRepository.findByName(h.getName());
+
+                if(byName==null){
+                    hashtagRepository.save(h);
+                }
             }
         }
+
         //해쉬태그 입력이 끝나면, Board-HashTag 연결상태 입력도 해야함
         Board save = boardRepository.save(request.toEntity());
 
-        for(Hashtag h : hashtags){
+        if(hashtags!=null){
+            for(Hashtag h : hashtags){
 
-            BoardHashtag boardHashtag = new BoardHashtag(null,save,h);
-            boardHashtagRepository.save(boardHashtag);
+                BoardHashtag boardHashtag = new BoardHashtag(null,save,h);
+                boardHashtagRepository.save(boardHashtag);
+            }
         }
+
 
         //파일저장 로직
 
@@ -55,7 +63,7 @@ public class BoardService {
     }
 
     // Board 조회로직
-    public BoardResponse findByContent(String keyword, String token){
+    public BoardResponse findByTitle(String keyword, String token){
 
         //Board를 조회하면  조회수 카운트를 하나 늘려야함.
         //중복체크도하고
@@ -81,16 +89,17 @@ public class BoardService {
         Board board = boardRepository.findById(boardId).get();
 
         //중복체크  여기 토큰 필요함
-        Views v = viewsRepository.findByMemberAndBoard(null, board);
+        Likes likes = likesRepository.findByMemberAndBoard(null, board);
 
-        if(v==null){
+        if(likes==null){
             board.addLikeCount();
             //토큰 필요함
-            Views views = Views.builder()
+            Likes build = Likes.builder()
                     .board(board)
-                    .member(null).build();
+                    .member(null)
+                    .build();
 
-            viewsRepository.save(views);
+            likesRepository.save(build);
         }
 
 

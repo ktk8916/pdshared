@@ -6,6 +6,7 @@ import com.playdata.pdshared.global.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,9 +30,9 @@ public class Board extends BaseEntity {
     @OneToOne(mappedBy = "board")
     private FileStorage fileStorage;
     @OneToMany(mappedBy = "board")
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
     @OneToMany(mappedBy = "board")
-    private List<BoardHashtag> hashtags;
+    private List<BoardHashtag> hashtags = new ArrayList<>();
 
     public void addViewCount(){
         this.viewCount++;

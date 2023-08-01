@@ -37,7 +37,7 @@ public class BoardController {
             @RequestHeader("Authorization") String token,
             @PathVariable String keyword){
 
-        return boardService.findByContent(keyword,token);
+        return boardService.findByTitle(keyword,token);
     }
 
     @PostMapping("/like")
