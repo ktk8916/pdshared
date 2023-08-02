@@ -1,0 +1,15 @@
+=== HOST
+include::{snippets}/board/curl-request.adoc[]
+
+=== Request Parameters:
+include::{snippets}/board/http-request.adoc[]
+
+=== Response
+include::{snippets}/board/http-response.adoc[]
+
+=== Response-fields
+include::{snippets}/board/response-fields.adoc[]
+
+
+
+// include::{snippets}/select-user/http-request.adoc[]
