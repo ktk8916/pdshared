@@ -1,5 +1,6 @@
 package com.playdata.pdshared.domain.filestorage.service;
 
+import com.playdata.pdshared.domain.board.repository.BoardRepository;
 import com.playdata.pdshared.domain.filestorage.domain.entity.FileStorage;
 import com.playdata.pdshared.domain.filestorage.exception.FileSaveFailException;
 import com.playdata.pdshared.domain.filestorage.repository.FileStorageRepository;
@@ -33,6 +34,8 @@ class FileStorageServiceTest {
     FileStorageService fileStorageService;
     @Autowired
     FileStorageRepository fileStorageRepository;
+    @Autowired
+    BoardRepository boardRepository;
 
 
     @Nested
@@ -48,7 +51,7 @@ class FileStorageServiceTest {
                     "testdata".getBytes());
 
             //when
-            fileStorageService.upload(file);
+            fileStorageService.upload(1L, file);
             FileStorage fileStorage = fileStorageRepository.findById(1L).get();
 
             //then

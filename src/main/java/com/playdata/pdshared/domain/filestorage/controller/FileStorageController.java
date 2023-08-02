@@ -16,7 +16,7 @@ public class FileStorageController {
 
     @PostMapping
     public void upload(@RequestParam("file") MultipartFile file){
-        fileStorageService.upload(file);
+        fileStorageService.upload(1L, file);
     }
 
     @GetMapping("/{fileStorageId}")
