@@ -13,8 +13,7 @@ public record BoardRequest(
         String content,
         String title,
         ViewType viewType,
-        List<Hashtag> hashtags,
-        FileStorage fileStorage
+        List<Hashtag> hashtags
 ) {
     public Board toEntity(){
 
@@ -22,8 +21,7 @@ public record BoardRequest(
                 .content(content)
                 .title(title)
                 .viewType(viewType)
-//                .hashtags(hashtags)
-                .fileStorage(fileStorage)
+//                .hashtags(hashtags
                 .likeCount(0L)
                 .downloadCount(0L)
                 .viewCount(0L)

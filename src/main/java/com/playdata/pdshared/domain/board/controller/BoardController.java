@@ -2,13 +2,16 @@ package com.playdata.pdshared.domain.board.domain.controller;
 
 
 import com.playdata.pdshared.domain.board.domain.entity.Board;
+import com.playdata.pdshared.domain.board.domain.entity.ViewType;
 import com.playdata.pdshared.domain.board.domain.request.BoardRequest;
 import com.playdata.pdshared.domain.board.domain.response.BoardResponse;
 import com.playdata.pdshared.domain.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,12 +25,15 @@ public class BoardController {
     @PostMapping
     public String save(
             @RequestHeader("Authorization") String token,
-            @RequestBody BoardRequest boardRequest){
+            @RequestPart("req") BoardRequest boardRequest,
+            @RequestPart("file") MultipartFile file){
 
         //여기서 token까서 member를 불러온뒤,
         // boardRequest에 넣어서 서비스로 보내야함
 
-        boardService.insert(boardRequest);
+        System.out.println(boardRequest);
+
+        boardService.insert(boardRequest,file);
 
         return "save 완료";
     }

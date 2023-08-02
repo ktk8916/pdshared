@@ -40,10 +40,10 @@ class BoardServiceTest {
     @Test
     void insert() {
         //given
-        BoardRequest boardRequest = new BoardRequest("내용1","제목", ViewType.PUBLIC,null,null);
+        BoardRequest boardRequest = new BoardRequest("내용1","제목", ViewType.PUBLIC,null);
         //when
 
-        boardService.insert(boardRequest);
+        boardService.insert(boardRequest,null);
 
         //then
 
@@ -55,8 +55,8 @@ class BoardServiceTest {
     @Test
     void findByContent() {
         //given
-        BoardRequest boardRequest = new BoardRequest("내용","뉴진스노래", ViewType.PUBLIC,null,null);
-        boardService.insert(boardRequest);
+        BoardRequest boardRequest = new BoardRequest("내용","뉴진스노래", ViewType.PUBLIC,null);
+        boardService.insert(boardRequest,null);
 
         //when
         BoardResponse 뉴진스 = boardService.findByTitle("뉴진스", null);
@@ -72,8 +72,8 @@ class BoardServiceTest {
     @Test
     void like() {
         //given
-        BoardRequest boardRequest = new BoardRequest("내용","고양이사진", ViewType.PUBLIC,null,null);
-        boardService.insert(boardRequest);
+        BoardRequest boardRequest = new BoardRequest("내용","고양이사진", ViewType.PUBLIC,null);
+        boardService.insert(boardRequest,null);
 
         //when
         boardService.like(1L,null);

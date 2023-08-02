@@ -52,7 +52,7 @@ public class FileStorageService {
                 .build();
 
         Downloads downloads = Downloads.of(member, fileStorage);
-//        fileStorage.getBoard().increaseDownload();
+        fileStorage.getBoard().addDownloadCount();
         downloadsRepository.save(downloads);
 
         return getResourceResponseEntity(resource);

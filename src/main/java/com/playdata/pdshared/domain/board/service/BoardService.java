@@ -4,10 +4,12 @@ import com.playdata.pdshared.domain.board.domain.entity.*;
 import com.playdata.pdshared.domain.board.domain.request.BoardRequest;
 import com.playdata.pdshared.domain.board.domain.response.BoardResponse;
 import com.playdata.pdshared.domain.board.repository.*;
+import com.playdata.pdshared.domain.filestorage.service.FileStorageService;
 import com.playdata.pdshared.domain.group.domain.entity.Team;
 import com.playdata.pdshared.domain.group.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -25,7 +27,9 @@ public class BoardService {
     private final BoardTeamRepository boardTeamRepository;
     private final TeamRepository teamRepository;
 
-    public void insert(BoardRequest request){
+    private final FileStorageService fileStorageService;
+
+    public void insert(BoardRequest request, MultipartFile file){
 
         //입력이 필요한부분
         //member는 토큰 까면 될듯?
@@ -45,6 +49,8 @@ public class BoardService {
             }
         }
 
+
+
         //해쉬태그 입력이 끝나면, Board-HashTag 연결상태 입력도 해야함
         Board save = boardRepository.save(request.toEntity());
 
@@ -58,6 +64,9 @@ public class BoardService {
 
 
         //파일저장 로직
+
+
+        fileStorageService.upload(save.getId(),file);
 
 
     }
