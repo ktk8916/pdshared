@@ -2,7 +2,14 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.2'
     id 'io.spring.dependency-management' version '1.1.2'
+    id 'jacoco'
 }
+
+jacoco {
+    toolVersion = "0.8.9"
+    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
+
 
 group = 'com.playdata'
 version = '0.0.1-SNAPSHOT'
@@ -16,6 +23,37 @@ configurations {
         extendsFrom annotationProcessor
     }
 }
+
+// groovy DSL
+
+jacocoTestReport {
+    reports {
+        // 원하는 리포트를 켜고 끌 수 있습니다.
+        html.required.set(true)
+        xml.required.set(false)
+        csv.required.set(false)
+
+//  각 리포트 타입 마다 리포트 저장 경로를 설정할 수 있습니다.
+  html.destination file("$buildDir/jacocoHtml")
+  xml.destination file("$buildDir/jacoco.xml")
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            element = 'CLASS'
+
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.90
+            }
+        }
+    }
+}
+
+
 
 repositories {
     mavenCentral()
@@ -41,6 +79,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 //    testImplementation 'org.springframework.security:spring-security-test'
 }
+
 
 tasks.named('test') {
     useJUnitPlatform()

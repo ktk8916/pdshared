@@ -74,6 +74,7 @@
 //                .authorizeHttpRequests((authorize) -> authorize
 //                        //어떤 요청이든 인증돼야함
 //                        .anyRequest().permitAll()
+//                        .requestMatchers("*").permitAll()
 //                )
 //                // Form login handles the redirect to the login page from the
 //                // authorization server filter chain

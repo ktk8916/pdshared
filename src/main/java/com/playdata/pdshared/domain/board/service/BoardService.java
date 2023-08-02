@@ -66,7 +66,10 @@ public class BoardService {
         //파일저장 로직
 
 
-        fileStorageService.upload(save.getId(),file);
+        if(file!=null){
+            fileStorageService.upload(save.getId(),file);
+        }
+
 
 
     }

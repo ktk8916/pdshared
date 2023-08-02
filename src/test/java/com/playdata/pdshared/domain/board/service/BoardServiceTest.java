@@ -41,16 +41,18 @@ class BoardServiceTest {
     void insert() {
         //given
         BoardRequest boardRequest = new BoardRequest("내용1","제목", ViewType.PUBLIC,null);
-        //when
 
+        //when
         boardService.insert(boardRequest,null);
 
         //then
-
-        Board board = boardRepository.findById(1L).get();
+        Board board1 = boardRepository.findByTitleContains("제목");
+        System.out.println(board1.getId());
+        Board board = boardRepository.findById(board1.getId()).get();
         assertThat(boardRequest.title()).isEqualTo(board.getTitle());
 
     }
+
 
     @Test
     void findByContent() {
@@ -76,10 +78,12 @@ class BoardServiceTest {
         boardService.insert(boardRequest,null);
 
         //when
-        boardService.like(1L,null);
+        Board board1 = boardRepository.findByTitleContains("고양이");
+        System.out.println(board1.getId());
+        boardService.like(board1.getId(),null);
 
         //then
-        Board board = boardRepository.findById(1L).get();
+        Board board = boardRepository.findById(board1.getId()).get();
         List<Likes> all = likesRepository.findAll();
         assertThat(board.getLikeCount()).isEqualTo(1);
         assertThat(all.size()).isEqualTo(1);
