@@ -26,15 +26,8 @@ dependencies {
 //    implementation 'org.springframework.boot:spring-boot-starter-security'
 //    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.5.2'
-    implementation "org.springframework.security:spring-security-oauth2-authorization-server:1.1.1"
-//    implementation 'com.google.oauth-client:google-oauth-client'
-    implementation 'io.jsonwebtoken:jjwt-api:0.11.2' // JJWT API
-    implementation 'io.jsonwebtoken:jjwt-impl:0.11.2' // JJWT 구현체
-    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2' // JJWT Jackson 지원 (Optional, JSON 직렬화/역직렬화를 위해 필요
-//    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
-    implementation 'org.springframework.boot:spring-boot-starter-webflux'
-
+//    implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.5.2'
+//    implementation "org.springframework.security:spring-security-oauth2-authorization-server:1.1.1"
 
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 //    implementation 'org.springframework.security:spring-security-test'
