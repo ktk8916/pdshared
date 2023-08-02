@@ -27,7 +27,7 @@ public class FileStorage extends BaseEntity {
     @OneToOne
     private Board board;
 
-    public static FileStorage from(MultipartFile file){
+    public static FileStorage of(Long boardId, MultipartFile file){
         FileStorage fileStorage = new FileStorage();
         String filename = file.getOriginalFilename();
         fileStorage.originalName = filename;
@@ -35,6 +35,7 @@ public class FileStorage extends BaseEntity {
         fileStorage.extension = filename.substring(filename.lastIndexOf("."));
         fileStorage.volume = file.getSize();
         fileStorage.savePath = fileStorage.uuid + fileStorage.extension;
+        fileStorage.board = Board.builder().id(boardId).build();
         return fileStorage;
     }
 }

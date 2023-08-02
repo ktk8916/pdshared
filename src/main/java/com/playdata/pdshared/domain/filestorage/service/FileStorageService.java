@@ -82,9 +82,9 @@ public class FileStorageService {
                 .body(resource);
     }
 
-    public void upload(MultipartFile file){
+    public void upload(Long boardId, MultipartFile file){
 
-        FileStorage fileStorage = FileStorage.from(file);
+        FileStorage fileStorage = FileStorage.of(boardId, file);
         String savedPath = SAVE_DIR + fileStorage.getSavePath();
 
         fileStorageRepository.save(fileStorage);
