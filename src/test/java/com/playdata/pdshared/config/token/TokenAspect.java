@@ -9,7 +9,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @RequiredArgsConstructor
 public class TokenAspect {
     private final TokenService tokenService;
-    @Before("@annotation(TokenRequired)")
+    @Before("@annotation(com.playdata.pdshared.config.token.TokenRequired)")
     public void TokenCheck(){
         //Todo 토큰 없으면 로그인 페이지로 가게함
         ServletRequestAttributes request =

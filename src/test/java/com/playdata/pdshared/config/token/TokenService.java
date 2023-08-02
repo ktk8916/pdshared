@@ -1,6 +1,6 @@
 package com.playdata.pdshared.config.token;
 
-import com.playdata.pdshared.domain.member.domain.entity.Member;
+import com.playdata.pdshared.Member;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

@@ -20,3 +20,7 @@ file:
       name: user
       password: test
 
+
+jwt:
+  secret: sdjfijweoinfkadsifvjewrjgniosdjggiawekjfsmiozdkljmviaeoskdlfmv
+
