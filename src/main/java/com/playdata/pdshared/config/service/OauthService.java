@@ -1,6 +1,4 @@
 package com.playdata.pdshared.config.service;
-
-
 import com.playdata.pdshared.config.controller.AccessTokenResponse;
 import com.playdata.pdshared.config.token.TokenService;
 import com.playdata.pdshared.domain.member.domain.entity.Member;
@@ -13,7 +11,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.reactive.function.client.WebClient;
-
 import java.util.Map;
 import java.util.Optional;
 
@@ -68,5 +65,4 @@ public class OauthService {
         }
         return tokenService.makeToken(member);
     }
-
 }
