@@ -1,4 +1,4 @@
-package com.playdata.pdshared.domain.join.domain.entitiy;
+package com.playdata.pdshared.domain.group.domain.entity;
 
 import com.playdata.pdshared.domain.group.domain.entity.Team;
 import com.playdata.pdshared.domain.member.domain.entity.Member;
@@ -18,4 +18,11 @@ public class Join {
     Team team;
     @ManyToOne
     Member member;
+
+    public static Join of(Team team, Member member){
+        return Join.builder()
+                .team(team)
+                .member(member)
+                .build();
+    }
 }
