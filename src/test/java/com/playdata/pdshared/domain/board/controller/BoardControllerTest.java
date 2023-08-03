@@ -2,10 +2,16 @@ package com.playdata.pdshared.domain.board.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.playdata.pdshared.domain.board.domain.entity.Board;
 import com.playdata.pdshared.domain.board.domain.entity.ViewType;
 import com.playdata.pdshared.domain.board.domain.request.BoardRequest;
+import com.playdata.pdshared.domain.board.repository.BoardRepository;
+import com.playdata.pdshared.domain.board.service.BoardService;
 import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,6 +21,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.mock.web.MockPart;
+import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -47,6 +55,7 @@ import static org.springframework.restdocs.request.RequestDocumentation.*;
 @Transactional
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
+@ExtendWith(RestDocumentationExtension.class)
 class BoardControllerTest {
 
     @Autowired
@@ -54,6 +63,31 @@ class BoardControllerTest {
 
     @Autowired
     ObjectMapper objectMapper;
+
+    @Autowired
+    BoardService boardService;
+    @Autowired
+    BoardRepository boardRepository;
+    @BeforeEach
+    void init(){
+
+        Board build = Board.builder()
+                .title("제목")
+                .content("내용입니다")
+                .viewType(ViewType.PUBLIC)
+                .viewCount(24L)
+                .downloadCount(5L)
+                .likeCount(2L)
+                .build();
+
+        boardRepository.save(build);
+
+    }
+
+    @AfterEach
+    void clear(){
+        boardRepository.deleteAll();
+    }
 
     @Test
     void save() throws Exception {
@@ -93,7 +127,7 @@ class BoardControllerTest {
                                 fieldWithPath("content").description("BoardRequest의 내용 필드에 대한 설명"),
                                 fieldWithPath("title").description("BoardRequest의 제목 필드에 대한 설명"),
                                 fieldWithPath("viewType").description("BoardRequest의 viewType 필드에 대한 설명").optional(),
-                                fieldWithPath("hashtags").description("BoardRequest의 additionalProperty 필드에 대한 설명").optional()
+                                fieldWithPath("hashtags").description("BoardRequest의 hashtags! 필드에 대한 설명").optional()
                         )
                 ));
 
@@ -102,7 +136,40 @@ class BoardControllerTest {
     }
 
     @Test
-    void find() {
+    void find() throws Exception {
+        //given
+        String keyword="제목";
+
+        //when&&then
+
+
+
+        mockMvc.perform(
+                //pathParameters 쓸거면 RestDocumentationRequestBuilders를 쓰자
+                RestDocumentationRequestBuilders.get("/board/{keyword}",keyword)
+                          .header("Authorization", "your-auth-token")
+                )
+                .andExpect(status().isOk())
+                .andDo(document("board/find",
+                        requestHeaders(
+                                headerWithName("Authorization").description("Authorization token")
+                        ),
+                        // 파라미터받을대 쓰는메소드
+                        pathParameters(
+                              parameterWithName("keyword").description("게시글 찾는데 쓰는 키워드")
+                        ),
+                        responseFields(
+                                fieldWithPath("member").description("멤버"),
+                                fieldWithPath("title").description("제목"),
+                                fieldWithPath("content").description("내용"),
+                                fieldWithPath("viewCount").description("조회수"),
+                                fieldWithPath("likeCount").description("좋아요수"),
+                                fieldWithPath("downloadCount").description("다운로드수"),
+                                fieldWithPath("viewType").description("뷰 형식")
+                        )
+                ));
+
+
     }
 
     @Test

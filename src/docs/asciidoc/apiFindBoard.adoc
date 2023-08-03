@@ -1,0 +1,33 @@
+= REST Docs
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+=== HOST Code
+include::{snippets}/board/find/curl-request.adoc[]
+
+=== Request Code
+include::{snippets}/board/find/http-request.adoc[]
+
+=== Response Code
+include::{snippets}/board/find/http-response.adoc[]
+
+=== Request-Header 요청에 필요한 헤더
+include::{snippets}/board/find/request-headers.adoc[]
+
+=== Request-PathParam 요청에 필요한 PathParam
+include::{snippets}/board/find/path-parameters.adoc[]
+
+=== 응답 결과
+include::{snippets}/board/find/response-body.adoc[]
+
+== 응답 결과 데이터 타입
+include::{snippets}/board/find/response-fields.adoc[]
