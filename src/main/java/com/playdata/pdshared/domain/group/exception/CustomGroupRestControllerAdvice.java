@@ -15,6 +15,12 @@ public class CustomGroupRestControllerAdvice {
         return new ExceptionResponse(e.getMessage());
     }
 
+    @ExceptionHandler(TeamPermissionException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ExceptionResponse teamPermissionException(TeamPermissionException e){
+        return new ExceptionResponse(e.getMessage());
+    }
+
     @ExceptionHandler(ExistMemberException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionResponse existMemberException(ExistMemberException e){
