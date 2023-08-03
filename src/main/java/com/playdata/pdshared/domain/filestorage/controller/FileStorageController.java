@@ -1,5 +1,7 @@
 package com.playdata.pdshared.domain.filestorage.controller;
 
+import com.playdata.pdshared.config.service.OauthService;
+import com.playdata.pdshared.config.token.TokenService;
 import com.playdata.pdshared.domain.filestorage.service.FileStorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -13,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileStorageController {
 
     private final FileStorageService fileStorageService;
+    private final TokenService tokenService;
 
     @PostMapping
     public void upload(@RequestParam("file") MultipartFile file){
@@ -20,9 +23,10 @@ public class FileStorageController {
     }
 
     @GetMapping("/{fileStorageId}")
-    public ResponseEntity<Resource> findVideo(@PathVariable("fileStorageId") Long fileStorageId) {
-        Long memberId = 1L; // 임의의 멤버 id
+    public ResponseEntity<Resource> findVideo(
+            @RequestHeader("Authorization") String token,
+            @PathVariable("fileStorageId") Long fileStorageId) {
+        Long memberId = tokenService.getMemberIdByToken(token);
         return fileStorageService.downloadFileById(fileStorageId, memberId);
     }
-
 }
