@@ -1,15 +1,24 @@
 === HOST
-include::{snippets}/board/curl-request.adoc[]
+include::{snippets}/board/save/curl-request.adoc[]
 
 === Request Parameters:
-include::{snippets}/board/http-request.adoc[]
+include::{snippets}/board/save/http-request.adoc[]
 
 === Response
-include::{snippets}/board/http-response.adoc[]
+include::{snippets}/board/save/http-response.adoc[]
 
 === Response-fields
-include::{snippets}/board/response-fields.adoc[]
+include::{snippets}/board/save/response-fields.adoc[]
 
 
+=== Request-Header
+include::{snippets}/board/save/request-headers.adoc[]
 
-// include::{snippets}/select-user/http-request.adoc[]
+=== 요청할때 필요한 Body 요소
+include::{snippets}/board/save/request-parts.adoc[]
+
+=== Request-Part-req-fields (req 내부 요소)
+include::{snippets}/board/save/request-part-req-fields.adoc[]
+
+=== 응답 결과
+include::{snippets}/board/save/response-body.adoc[]
