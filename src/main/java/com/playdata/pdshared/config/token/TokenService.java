@@ -18,6 +18,7 @@ public class TokenService {
     public String makeToken(Member member){
         SecretKeySpec key = getKey();
         String compact = Jwts.builder()
+                .claim("id", member.getId())
                 .claim("providerId", member.getProviderId())
                 .setExpiration(new Date(System.currentTimeMillis() + 120_000))
                 .signWith(key)
@@ -31,6 +32,11 @@ public class TokenService {
                 .build()
                 .parse(token)
                 .getBody();
+    }
+
+    public Long getMemberIdByToken(String token){
+        Map<String, Object> claims = getClaims(token);
+        return ((Integer)claims.get("id")).longValue();
     }
 
 

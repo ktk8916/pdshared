@@ -5,6 +5,7 @@ import com.playdata.pdshared.domain.group.domain.entity.Team;
 import com.playdata.pdshared.domain.group.domain.request.TeamRequest;
 import com.playdata.pdshared.domain.group.exception.ExistMemberException;
 import com.playdata.pdshared.domain.group.exception.TeamNotFoundException;
+import com.playdata.pdshared.domain.group.exception.TeamPermissionException;
 import com.playdata.pdshared.domain.group.repository.JoinRepository;
 import com.playdata.pdshared.domain.group.repository.TeamRepository;
 import com.playdata.pdshared.domain.member.domain.entity.Member;
@@ -39,8 +40,12 @@ public class GroupService {
         teamRepository.save(team);
     }
 
-    public void invite(Long teamId, Long memberId) {
+    public void invite(Long ownerId, Long teamId, Long memberId) {
         Team team = findById(teamId);
+
+        if(!team.isValidOwner(ownerId)){
+            throw new TeamPermissionException("IS NOT GROUP OWNER");
+        }
 
         Member member = Member.builder()
                 .id(memberId)
