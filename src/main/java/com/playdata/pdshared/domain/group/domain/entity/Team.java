@@ -20,4 +20,7 @@ public class Team extends BaseEntity {
     private String name;
     private Long storageUsage;
 
+    public boolean isValidOwner(Long ownerId){
+        return owner.getId().equals(ownerId);
+    }
 }
